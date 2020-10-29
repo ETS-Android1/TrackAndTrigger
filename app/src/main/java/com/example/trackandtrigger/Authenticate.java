@@ -33,10 +33,7 @@ public class Authenticate extends AppCompatActivity {
         String phno= getIntent().getStringExtra("PhoneNO");
         String email=getIntent().getStringExtra("EmailID");
         final String[] otp = new String[1];
-        PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback = null;
-        PhoneAuthProvider.getInstance().verifyPhoneNumber(phno,60, TimeUnit.SECONDS,Authenticate.this,mCallback);
-        EditText mPhVerify=findViewById(R.id.PhVerify);
-        Button mVerify=findViewById(R.id.Verify);
+        PhoneAuthProvider.OnVerificationStateChangedCallbacks mCallback;
         mCallback = new PhoneAuthProvider.OnVerificationStateChangedCallbacks() {
             @Override
             public void onVerificationCompleted(@NonNull PhoneAuthCredential phoneAuthCredential) {
@@ -53,6 +50,10 @@ public class Authenticate extends AppCompatActivity {
                 Toast.makeText(Authenticate.this,"Code sent",Toast.LENGTH_SHORT).show();
             }
         };
+        PhoneAuthProvider.getInstance().verifyPhoneNumber(phno,60, TimeUnit.SECONDS,Authenticate.this,mCallback);
+        EditText mPhVerify=findViewById(R.id.PhVerify);
+        Button mVerify=findViewById(R.id.Verify);
+
         mVerify.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
