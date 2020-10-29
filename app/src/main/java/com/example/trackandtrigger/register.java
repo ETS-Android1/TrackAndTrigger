@@ -28,7 +28,7 @@ public class register extends AppCompatActivity {
     final Pattern pass = Pattern.compile(valid_password);
     final Pattern phno = Pattern.compile(valid_phone);
     EditText mFullName,mEmail,mPassword,mPhone;
-    Button mRegisterBtn;
+    private Button mRegisterBtn;
     TextView mLoginBtn;
     FirebaseAuth fAuth;
     ProgressBar progressBar;
@@ -42,16 +42,11 @@ public class register extends AppCompatActivity {
         mEmail      =   findViewById(R.id.Email);
         mPassword   =   findViewById(R.id.Password);
         mPhone      =   findViewById(R.id.Phone);
-        mRegisterBtn=   findViewById(R.id.Register);
+        mRegisterBtn=   findViewById(R.id.Regbtn);
         mLoginBtn   =   findViewById(R.id.Login);
 
         fAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar);
-
-        if(fAuth.getCurrentUser() != null) {
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-            finish();
-        }
 
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,20 +76,6 @@ public class register extends AppCompatActivity {
                 else {
 
                     progressBar.setVisibility(View.VISIBLE);
-                    fAuth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
-
-                                startActivity(new Intent(getApplicationContext(),Authentication.class));
-                            }
-                            else{
-                                Toast.makeText(register.this, "An error has occured. Try after sometime.", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
-
-                    finish();
                 }
             }
         });
