@@ -18,5 +18,15 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         fAuth=FirebaseAuth.getInstance();
         CurrentUser=fAuth.getCurrentUser();
+
+        if(CurrentUser == null)
+        {
+            Intent RegisterIntent = new Intent(MainActivity.this,register.class);
+            startActivity(RegisterIntent);
+        }
+        else{
+            Intent ProfIntent = new Intent(MainActivity.this,Profession.class);
+            startActivity(ProfIntent);
+        }
     }
 }

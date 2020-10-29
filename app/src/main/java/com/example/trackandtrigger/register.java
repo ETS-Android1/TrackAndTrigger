@@ -16,7 +16,9 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.PhoneAuthProvider;
 
+import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -76,19 +78,10 @@ public class register extends AppCompatActivity {
                 else {
 
                     progressBar.setVisibility(View.VISIBLE);
-                    fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>()
-                    {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task)
-                        {
-                            if (task.isSuccessful())
-                            {
-                                Toast.makeText(register.this, "Successfull!!", Toast.LENGTH_SHORT).show();
-                            }
-                            else
-                                Toast.makeText(register.this, "An error has occured. Try after sometime.", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    Intent auth = new Intent(register.this,Authenticate.class);
+                    auth.putExtra("PhoneNO",phone);
+                    auth.putExtra("EmailID",email);
+                    startActivity(auth);
                 }
             }
         });
