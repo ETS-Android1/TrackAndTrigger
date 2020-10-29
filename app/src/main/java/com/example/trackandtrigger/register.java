@@ -76,6 +76,19 @@ public class register extends AppCompatActivity {
                 else {
 
                     progressBar.setVisibility(View.VISIBLE);
+                    fAuth.createUserWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>()
+                    {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task)
+                        {
+                            if (task.isSuccessful())
+                            {
+                                Toast.makeText(register.this, "Successfull!!", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                                Toast.makeText(register.this, "An error has occured. Try after sometime.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 }
             }
         });
