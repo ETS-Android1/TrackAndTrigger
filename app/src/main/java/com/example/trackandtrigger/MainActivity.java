@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(RegisterIntent);
         }
         else{
-
+            Intent DashboardIntent = new Intent(MainActivity.this,Dashboard.class);
+            startActivity(DashboardIntent);
 
         }
     }

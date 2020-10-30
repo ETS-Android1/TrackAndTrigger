@@ -21,7 +21,9 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthProvider;
+import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -42,6 +44,8 @@ public class register extends AppCompatActivity {
     ProgressBar progressBar;
 
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -57,6 +61,13 @@ public class register extends AppCompatActivity {
 
         fAuth=FirebaseAuth.getInstance();
         progressBar=findViewById(R.id.progressBar);
+
+        mLoginBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(register.this,Login.class));
+            }
+        });
 
         mRegisterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -107,6 +118,12 @@ public class register extends AppCompatActivity {
                                         Toast.makeText(register.this, "Error", Toast.LENGTH_SHORT).show();
                                     }
                                 });
+                                FirebaseDatabase.getInstance().getReference().child("user").setValue(name);
+                                HashMap<String,Object> map=new HashMap<String,Object>();
+                                map.put("password",password);
+                                map.put("Email",email);
+                                map.put("PhoneNo",phone);
+                                FirebaseDatabase.getInstance().getReference().child(name).updateChildren(map);
 
 
 
