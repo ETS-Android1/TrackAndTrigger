@@ -39,8 +39,11 @@ public class Profession extends AppCompatActivity {
                     prof="Bachelor";
                 else
                     prof="Working Professional";
-                FirebaseDatabase.getInstance().getReference().child("user").child("profession").setValue(prof);
+Intent intent=getIntent();
+String name=intent.getStringExtra("name");
+                FirebaseDatabase.getInstance().getReference().child(name).child("profession").setValue(prof);
                 Intent profint=new Intent(Profession.this,Login.class);
+                profint.putExtra("name",name);
 
                 profint.putExtra("profession",prof);
 
