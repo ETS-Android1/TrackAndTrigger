@@ -9,6 +9,8 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import com.google.firebase.database.FirebaseDatabase;
+
 public class Profession extends AppCompatActivity {
     RadioGroup radiogroup;
     RadioButton hm,wk,bh,js;
@@ -37,6 +39,7 @@ public class Profession extends AppCompatActivity {
                     prof="Bachelor";
                 else
                     prof="Working Professional";
+                FirebaseDatabase.getInstance().getReference().child("user").child("profession").setValue(prof);
                 Intent profint=new Intent(Profession.this,Login.class);
 
                 profint.putExtra("profession",prof);

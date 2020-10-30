@@ -133,7 +133,7 @@ public class Authenticate extends AppCompatActivity {
 
                             Toast.makeText(Authenticate.this, "Verified", Toast.LENGTH_SHORT).show();
 
-                            Intent intent = new Intent(getApplicationContext(), MainActivity.class); //change later
+                            Intent intent = new Intent(getApplicationContext(), Profession.class); //change later
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);
 
