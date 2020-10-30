@@ -25,25 +25,25 @@ public class Profession extends AppCompatActivity {
         wk= findViewById(R.id.Wk);
         final RadioGroup rg = findViewById(R.id.radiogroup);
 
-btn.setOnClickListener(new View.OnClickListener() {
-    @Override
-    public void onClick(View view) {
-        String prof="";
-        if(hm.isChecked())
-            prof="Home Maker";
-        else if (js.isChecked())
-            prof="Job Seeker";
-        else if(bh.isChecked())
-            prof="Bachelor";
-        else
-            prof="Working Professional";
-        Intent profint=new Intent(Profession.this,DashBoard.class);
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                String prof="";
+                if(hm.isChecked())
+                    prof="Home Maker";
+                else if (js.isChecked())
+                    prof="Job Seeker";
+                else if(bh.isChecked())
+                    prof="Bachelor";
+                else
+                    prof="Working Professional";
+                Intent profint=new Intent(Profession.this,Login.class);
 
                 profint.putExtra("profession",prof);
 
-        startActivity(profint);
-    }
-});
+                startActivity(profint);
+            }
+        });
 
 
 
