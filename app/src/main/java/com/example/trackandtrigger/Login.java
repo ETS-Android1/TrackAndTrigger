@@ -1,8 +1,5 @@
 package com.example.trackandtrigger;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -11,6 +8,9 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -82,25 +81,22 @@ public class Login extends AppCompatActivity {
                     fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
-                            if(task.isSuccessful()){
+                            if(task.isSuccessful()) {
                                 Toast.makeText(Login.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
                                 FirebaseDatabase.getInstance().getReference().child("bhuvan").setValue("bhuvan");
                                 FirebaseDatabase.getInstance().getReference().child("bhuvan").child("Email").setValue("kbhuvanchand@gmail.com");
-System.out.println(email);
-String[] name=new String[4];
+
+                                String[] name = new String[4];
 
                                 DatabaseReference reference;
                                 reference = FirebaseDatabase.getInstance().getReference();
                                 reference.orderByChild("Email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
                                     @Override
                                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
-                                             name[0]=childSnapshot.getKey();
-                                             System.out.println("nmaee"+name[0]);
-
+                                        for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                                            name[0] = childSnapshot.getKey();
                                         }
-                                        System.out.println("nnnnnnn"+name[0]);
-                                        Intent intent=new Intent(Login.this,Dashboard.class);
+                                        Intent intent = new Intent(Login.this, Dashboard.class);
                                         intent.putExtra("name",name[0]);
                                         startActivity(intent);
                                     }

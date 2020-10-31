@@ -1,7 +1,5 @@
 package com.example.trackandtrigger;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -9,12 +7,15 @@ import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 import com.google.firebase.database.FirebaseDatabase;
 
 public class Profession extends AppCompatActivity {
     RadioGroup radiogroup;
     RadioButton hm,wk,bh,js;
     Button btn;
+    String prof = "none";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,10 +28,11 @@ public class Profession extends AppCompatActivity {
         wk= findViewById(R.id.Wk);
         final RadioGroup rg = findViewById(R.id.radiogroup);
 
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String prof="";
+
                 if(hm.isChecked())
                     prof="Home Maker";
                 else if (js.isChecked())
@@ -41,7 +43,6 @@ public class Profession extends AppCompatActivity {
                     prof="Working Professional";
              Intent intent=getIntent();
             String name=intent.getStringExtra("name");
-            System.out.println("profesion"+name);
             if(name !=null) {
                 FirebaseDatabase.getInstance().getReference().child(name).child("profession").setValue(prof);
             }
