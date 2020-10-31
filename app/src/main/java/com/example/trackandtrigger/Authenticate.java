@@ -132,9 +132,10 @@ public class Authenticate extends AppCompatActivity {
                     public void onComplete(@NonNull Task<AuthResult> task) {
 
                         if (task.isSuccessful()) {
-
                             Toast.makeText(Authenticate.this, "Verified", Toast.LENGTH_SHORT).show();
 
+                            Intent intent1=getIntent();
+                            String name=intent1.getStringExtra("name");
                             Intent intent = new Intent(getApplicationContext(), Profession.class);
                             intent.putExtra("name",name);
                         //change later

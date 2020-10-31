@@ -16,7 +16,13 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
+import java.util.HashMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -30,6 +36,7 @@ public class Login extends AppCompatActivity {
     final String valid_password = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{8,}$";
     final Pattern mail = Pattern.compile(valid_email);
     final Pattern pass = Pattern.compile(valid_password);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,12 +78,38 @@ public class Login extends AppCompatActivity {
                 else{
                     progressBar.setVisibility(View.VISIBLE);
                     //Authenticate User
+
                     fAuth.signInWithEmailAndPassword(email,password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()){
                                 Toast.makeText(Login.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
-                                startActivity(new Intent(Login.this,Dashboard.class));
+                                FirebaseDatabase.getInstance().getReference().child("bhuvan").setValue("bhuvan");
+                                FirebaseDatabase.getInstance().getReference().child("bhuvan").child("Email").setValue("kbhuvanchand@gmail.com");
+System.out.println(email);
+String[] name=new String[4];
+
+                                DatabaseReference reference;
+                                reference = FirebaseDatabase.getInstance().getReference();
+                                reference.orderByChild("Email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                                        for (DataSnapshot childSnapshot: dataSnapshot.getChildren()) {
+                                             name[0]=childSnapshot.getKey();
+                                             System.out.println("nmaee"+name[0]);
+
+                                        }
+                                        System.out.println("nnnnnnn"+name[0]);
+                                        Intent intent=new Intent(Login.this,Dashboard.class);
+                                        intent.putExtra("name",name[0]);
+                                        startActivity(intent);
+                                    }
+                                    @Override
+                                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                                    }
+                                });
+
                             }
                             else{
                                 Toast.makeText(Login.this, "Incorrect Credentials", Toast.LENGTH_SHORT).show();

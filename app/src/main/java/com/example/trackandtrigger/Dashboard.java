@@ -27,40 +27,50 @@ import java.util.HashMap;
 public class Dashboard extends AppCompatActivity {
     ListView lv;
     TextView catname;
+    String name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-
         Intent intent=getIntent();
-        String name=intent.getStringExtra("name");
+        name=intent.getStringExtra("profename");
+       if(name ==null)
+        name=intent.getStringExtra("name");
         lv= findViewById(R.id.lv);
         catname= findViewById(R.id.catname);
+
         HashMap<String,Object> map=new HashMap<String,Object>();
         map.put("Groceries","Groceries");
         map.put("Kitchen Appliances","Kitchen Appliances");
         map.put("HouseHold maintainence","HouseHold maintainence");
-        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
-        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map);
+        if(name != null) {
+            System.out.println("dasgboard"+name);
+            FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
+            FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map);
+        }
+
         ArrayList<String> list=new ArrayList<String>();
         ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
         lv.setAdapter(adapter);
-        DatabaseReference mref= FirebaseDatabase.getInstance().getReference().child(name).child("Dashboard");
-        mref.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                list.clear();
-                for (DataSnapshot snap : snapshot.getChildren())
-                    list.add(snap.getValue().toString());
-                adapter.notifyDataSetChanged();
+        if(name != null) {
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard");
+System.out.println("list"+name);
+            mref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    list.clear();
+                    for (DataSnapshot snap : snapshot.getChildren())
+                        list.add(snap.getValue().toString());
+                    adapter.notifyDataSetChanged();
 
-            }
+                }
 
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            }
-        });
+                }
+            });
+        }
         Button btn= findViewById(R.id.addbtn);
 
         btn.setOnClickListener(new View.OnClickListener() {
@@ -69,8 +79,10 @@ public class Dashboard extends AppCompatActivity {
                 String s=catname.getText().toString();
                 if(s.isEmpty())
                     Toast.makeText(Dashboard.this, "Enter Category", Toast.LENGTH_SHORT).show();
-                else
+                else {
+                    if(name != null)
                     FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
+                }
             }
         });
 

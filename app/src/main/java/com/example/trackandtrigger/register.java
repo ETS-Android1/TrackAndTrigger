@@ -118,12 +118,15 @@ public class register extends AppCompatActivity {
                                         Toast.makeText(register.this, "Error", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                                FirebaseDatabase.getInstance().getReference().child(name).setValue(name);
-                                HashMap<String,Object> map=new HashMap<String,Object>();
-                                map.put("password",password);
-                                map.put("Email",email);
-                                map.put("PhoneNo",phone);
-                                FirebaseDatabase.getInstance().getReference().child(name).updateChildren(map);
+                                if(email != null) {
+                                    FirebaseDatabase.getInstance().getReference().child(name).setValue(name);
+                                    HashMap<String, Object> map = new HashMap<String, Object>();
+                                    map.put("password", password);
+                                    map.put("Email", email);
+                                    map.put("PhoneNo", phone);
+                                    map.put("Name", name);
+                                    FirebaseDatabase.getInstance().getReference().child(name).updateChildren(map);
+                                }
 
 
 
