@@ -27,18 +27,22 @@ public class Dashboard extends AppCompatActivity {
     TextView catname;
     String name;
     FirebaseAuth Auth;
+    String[] Username = new String[4];
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         Intent intent = getIntent();
         name = intent.getStringExtra("profename");
+        Auth = FirebaseAuth.getInstance();
         if (name == null)
             name = intent.getStringExtra("name");
         lv = findViewById(R.id.lv);
         catname = findViewById(R.id.catname);
         String email = Auth.getCurrentUser().getEmail().toString();
-        String[] Username = new String[4];
+        System.out.println(email);
+
         DatabaseReference reference;
         reference = FirebaseDatabase.getInstance().getReference();
         reference.orderByChild("Email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -63,7 +67,7 @@ public class Dashboard extends AppCompatActivity {
         map.put("Kitchen Appliances", "Kitchen Appliances");
         map.put("HouseHold maintainence", "HouseHold maintainence");
         if (name != null) {
-            System.out.println("dasgboard" + name);
+            System.out.println("dashboard" + name);
             FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
             FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map);
         }

@@ -83,8 +83,6 @@ public class Login extends AppCompatActivity {
                         public void onComplete(@NonNull Task<AuthResult> task) {
                             if(task.isSuccessful()) {
                                 Toast.makeText(Login.this, "Successfully logged in", Toast.LENGTH_SHORT).show();
-                                FirebaseDatabase.getInstance().getReference().child("bhuvan").setValue("bhuvan");
-                                FirebaseDatabase.getInstance().getReference().child("bhuvan").child("Email").setValue("kbhuvanchand@gmail.com");
 
                                 String[] name = new String[4];
 
@@ -99,6 +97,7 @@ public class Login extends AppCompatActivity {
                                         Intent intent = new Intent(Login.this, Dashboard.class);
                                         intent.putExtra("name",name[0]);
                                         startActivity(intent);
+                                        finish();
                                     }
                                     @Override
                                     public void onCancelled(@NonNull DatabaseError databaseError) {

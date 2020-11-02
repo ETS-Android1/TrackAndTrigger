@@ -52,6 +52,7 @@ public class Profession extends AppCompatActivity {
                 profint.putExtra("profession",prof);
 
                 startActivity(profint);
+                finish();
             }
         });
 
