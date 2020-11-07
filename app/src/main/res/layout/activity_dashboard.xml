@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Text"
     android:layout_width="match_parent"
@@ -22,20 +21,24 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        android:text="Cateogory name" />
+        android:hint="Cateogory name" />
 
     <Button
         android:id="@+id/addbtn"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="100sp"
+        android:layout_marginTop="50sp"
         android:text="Add Category" />
 
     <Button
         android:id="@+id/Logout"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
+        android:layout_marginLeft="100sp"
+        android:layout_marginTop="50sp"
         android:layout_height="wrap_content"
         android:text="Logout"
 
-        android:onClick="Logout"/>
+        android:onClick="Logout" />
 
 </LinearLayout>

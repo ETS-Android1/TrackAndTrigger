@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".Category">
+
+    <TextView
+        android:id="@+id/cat"
+        android:layout_width="200sp"
+        android:layout_height="40sp"
+        android:text="category"></TextView>
+
+    <Button
+        android:id="@+id/minus"
+        android:layout_width="50sp"
+        android:layout_height="40sp"
+        android:text="-"></Button>
+
+
+    <TextView
+        android:id="@+id/inc"
+        android:layout_width="50sp"
+        android:layout_height="40sp"
+        android:layout_marginLeft="10sp"
+        android:layout_marginRight="10sp"
+        android:text="am"></TextView>
+
+    <Button
+        android:id="@+id/plus"
+        android:layout_width="50sp"
+        android:layout_height="40sp"
+        android:layout_marginRight="10sp"
+        android:text="+"></Button>
+
+
+</LinearLayout>

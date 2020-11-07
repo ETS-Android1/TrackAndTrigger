@@ -3,6 +3,7 @@ package com.example.trackandtrigger;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -20,14 +21,17 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Dashboard extends AppCompatActivity {
     ListView lv;
     TextView catname;
     String name;
+    String name1;
     FirebaseAuth Auth;
     String[] Username = new String[4];
+    String[] Username1 = new String[4];
+    ArrayAdapter adapter;
+    ArrayList<String> list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,7 +45,6 @@ public class Dashboard extends AppCompatActivity {
         lv = findViewById(R.id.lv);
         catname = findViewById(R.id.catname);
         String email = Auth.getCurrentUser().getEmail().toString();
-        System.out.println(email);
 
         DatabaseReference reference;
         reference = FirebaseDatabase.getInstance().getReference();
@@ -62,22 +65,11 @@ public class Dashboard extends AppCompatActivity {
             name = Username[0];
 
 
-        HashMap<String, Object> map = new HashMap<String, Object>();
-        map.put("Groceries", "Groceries");
-        map.put("Kitchen Appliances", "Kitchen Appliances");
-        map.put("HouseHold maintainence", "HouseHold maintainence");
-        if (name != null) {
-            System.out.println("dashboard" + name);
-            FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
-            FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map);
-        }
+        list = new ArrayList<String>();
+        adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
 
-        ArrayList<String> list=new ArrayList<String>();
-        ArrayAdapter adapter=new ArrayAdapter(this,android.R.layout.simple_list_item_1, list);
-        lv.setAdapter(adapter);
-        if(name != null) {
+        if (name != null) {
             DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard");
-System.out.println("list"+name);
             mref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -94,27 +86,94 @@ System.out.println("list"+name);
                 }
             });
         }
-        Button btn= findViewById(R.id.addbtn);
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (list.get(i).equals("Groceries")) {
+                    Intent dashint = new Intent(Dashboard.this, Groceries.class);
+                    dashint.putExtra("name", name);
+                    startActivity(dashint);
+                }
+
+            }
+        });
+        Button btn = findViewById(R.id.addbtn);
 
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String s=catname.getText().toString();
-                if(s.isEmpty())
+                String s = catname.getText().toString();
+                if (s.isEmpty())
                     Toast.makeText(Dashboard.this, "Enter Category", Toast.LENGTH_SHORT).show();
                 else {
-                    if(name != null)
-                    FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
+                    if (name != null)
+                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
                 }
             }
         });
 
-
-
-
+        lv.setAdapter(adapter);
 
 
     }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        String email = Auth.getCurrentUser().getEmail().toString();
+        DatabaseReference reference;
+        reference = FirebaseDatabase.getInstance().getReference();
+        reference.orderByChild("Email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                for (DataSnapshot childSnapshot : dataSnapshot.getChildren()) {
+                    Username1[0] = childSnapshot.getKey();
+                    name1 = Username1[0];
+                }
+                if (name1 != null) {
+                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name1).child("dashboard");
+                    mref.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            list.clear();
+                            for (DataSnapshot snap : snapshot.getChildren())
+                                list.add(snap.getValue().toString());
+                            adapter.notifyDataSetChanged();
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                }
+                if (list != null && list.size() > 0) {
+                    adapter = new ArrayAdapter(Dashboard.this, android.R.layout.simple_list_item_1, list);
+                    lv.setAdapter(adapter);
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+        lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (list.get(i).equals("Groceries")) {
+                    Intent dashint = new Intent(Dashboard.this, Groceries.class);
+                    dashint.putExtra("name", name1);
+                    startActivity(dashint);
+                }
+
+            }
+        });
+
+    }
+
 
     public void Logout(View view) {
 
@@ -124,4 +183,5 @@ System.out.println("list"+name);
 
 
     }
+
 }

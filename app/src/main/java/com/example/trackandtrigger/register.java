@@ -122,6 +122,16 @@ public class register extends AppCompatActivity {
                                     map.put("PhoneNo", phone);
                                     map.put("Name", name);
                                     FirebaseDatabase.getInstance().getReference().child(name).updateChildren(map);
+                                    HashMap<String, Object> map1 = new HashMap<String, Object>();
+                                    map.put("Groceries", "Groceries");
+                                    map.put("Kitchen Appliances", "Kitchen Appliances");
+                                    map.put("HouseHold maintainence", "HouseHold maintainence");
+                                    if (name != null) {
+                                        System.out.println("dashboard" + name);
+                                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
+                                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map1);
+                                        FirebaseDatabase.getInstance().getReference().child(name).child("InGroceries").setValue("InGroceries");
+                                    }
                                 }
 
 

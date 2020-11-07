@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".item">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="30sp"
+        android:paddingLeft="50sp"
+        android:text="Create a new Item "
+        android:textColor="@color/black"
+        android:textSize="30sp"></TextView>
+
+    <EditText
+        android:id="@+id/itemtext"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="30sp"
+        android:layout_marginLeft="50sp"
+        android:layout_marginTop="30sp"
+        android:hint="Enter the Item"></EditText>
+
+    <EditText
+        android:id="@+id/quantext"
+        android:layout_width="200sp"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="30sp"
+        android:layout_marginLeft="50sp"
+        android:layout_marginTop="30sp"
+        android:hint="Quantity"></EditText>
+
+    <Button
+        android:id="@+id/addbtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="100sp"
+        android:text="Add"></Button>
+
+
+</LinearLayout>

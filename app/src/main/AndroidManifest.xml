@@ -13,6 +13,10 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackAndTrigger"
         tools:replace="android:theme">
+        <activity android:name=".item"></activity>
+        <activity android:name=".Groceries" />
+
+        <activity android:name=".Category" />
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
