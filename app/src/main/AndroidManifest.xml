@@ -13,7 +13,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackAndTrigger"
         tools:replace="android:theme">
-        <activity android:name=".To_Do"/>
+        <activity android:name=".To_Do_Category"></activity>
+        <activity android:name=".To_Do" />
         <activity android:name=".To_Do_List" />
         <activity android:name=".item" />
         <activity android:name=".Groceries" />
