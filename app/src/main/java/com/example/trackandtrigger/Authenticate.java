@@ -39,8 +39,8 @@ public class Authenticate extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
         String phno = bundle.getString("PhoneNO");
         String email = bundle.getString("EmailID");
-        String password = bundle.getString("Password");
         String name = bundle.getString("Name");
+        String Google=bundle.getString("Google");
 
         verify_btn = findViewById(R.id.Verify);
         code_entered_by_user = findViewById(R.id.PhVerify);
@@ -121,8 +121,8 @@ public class Authenticate extends AppCompatActivity {
         Bundle bundle=getIntent().getExtras();
         String phno = bundle.getString("PhoneNO");
         String email = bundle.getString("EmailID");
-        String password = bundle.getString("Password");
         String name = bundle.getString("Name");
+        String Google= bundle.getString("Google");
         FirebaseAuth firebaseAuth = FirebaseAuth.getInstance();
 
         firebaseAuth.signInWithCredential(credential)
@@ -134,6 +134,9 @@ public class Authenticate extends AppCompatActivity {
                             Toast.makeText(Authenticate.this, "Verified", Toast.LENGTH_SHORT).show();
                             Intent intent = new Intent(getApplicationContext(), Profession.class);
                             intent.putExtra("name",name);
+                            intent.putExtra("EmailID",email);
+                            intent.putExtra("Phone",phno);
+                            intent.putExtra("Google",Google);
                         //change later
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                             startActivity(intent);

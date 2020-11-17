@@ -1,4 +1,4 @@
-package com.example.trackandtrigger;
+/**package com.example.trackandtrigger;
 
 import android.app.Activity;
 import android.view.LayoutInflater;
@@ -58,3 +58,4 @@ public class adapter extends ArrayAdapter<String> {
         return view;
     }
 }
+**/

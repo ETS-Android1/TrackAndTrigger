@@ -135,27 +135,6 @@ public class register extends AppCompatActivity {
                                         Toast.makeText(register.this, "Error", Toast.LENGTH_SHORT).show();
                                     }
                                 });
-                                if(email != null) {
-                                    FirebaseDatabase.getInstance().getReference().child(name).setValue(name);
-                                    HashMap<String, Object> map = new HashMap<String, Object>();
-                                    map.put("Email", email);
-                                    map.put("PhoneNo", phone);
-                                    map.put("Name", name);
-                                    FirebaseDatabase.getInstance().getReference().child(name).updateChildren(map);
-                                    HashMap<String, Object> map1 = new HashMap<String, Object>();
-                                    map.put("Groceries", "Groceries");
-                                    map.put("Kitchen Appliances", "Kitchen Appliances");
-                                    map.put("HouseHold maintainence", "HouseHold maintainence");
-                                    if (name != null) {
-                                        System.out.println("dashboard" + name);
-                                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
-                                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map1);
-                                        FirebaseDatabase.getInstance().getReference().child(name).child("InGroceries").setValue("InGroceries");
-                                    }
-                                }
-
-
-
                                 Toast.makeText(register.this, "Successfull!!", Toast.LENGTH_SHORT).show();
                             }
                             else
@@ -165,7 +144,8 @@ public class register extends AppCompatActivity {
                     Intent auth = new Intent(register.this,Authenticate.class);
                     auth.putExtra("PhoneNO",phone);
                     auth.putExtra("EmailID",email);
-                    auth.putExtra("Password",password);
+                    auth.putExtra("Google","No");
+                    //auth.putExtra("Password",password);
                     auth.putExtra("Name",name);
                     startActivity(auth);
                     finish();

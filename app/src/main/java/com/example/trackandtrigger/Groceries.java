@@ -29,7 +29,7 @@ public class Groceries extends AppCompatActivity {
 
     int k = 0;
     adapter ad;
-    String name;
+    String name,Item;
     ArrayList<String> progname, progquan;
     String quan[];
     String frname[];
@@ -42,6 +42,7 @@ public class Groceries extends AppCompatActivity {
         btn = (Button) findViewById(R.id.btn);
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
+        Item = intent.getStringExtra("Item");
         progname = new ArrayList<String>();
         progquan = new ArrayList<String>();
         btn.setOnClickListener(new View.OnClickListener() {
@@ -53,7 +54,7 @@ public class Groceries extends AppCompatActivity {
             }
         });
         if (name != null) {
-            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("InGroceries");
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("In"+Item);
             mref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -107,7 +108,7 @@ public class Groceries extends AppCompatActivity {
                     int i = Integer.parseInt(inc.getText().toString());
                     inc.setText(String.valueOf(i + 1));
                     if (name != null)
-                        FirebaseDatabase.getInstance().getReference().child(name).child("InGroceries").child(prognames[position]).setValue(String.valueOf(i + 1));
+                        FirebaseDatabase.getInstance().getReference().child(name).child("In"+Item).child(prognames[position]).setValue(String.valueOf(i + 1));
                 }
             });
             minus.setOnClickListener(new View.OnClickListener() {
@@ -116,7 +117,7 @@ public class Groceries extends AppCompatActivity {
                     int i = Integer.parseInt(inc.getText().toString());
                     inc.setText(String.valueOf(i - 1));
                     if (name != null)
-                        FirebaseDatabase.getInstance().getReference().child(name).child("InGroceries").child(prognames[position]).setValue(String.valueOf(i - 1));
+                        FirebaseDatabase.getInstance().getReference().child(name).child("In"+Item).child(prognames[position]).setValue(String.valueOf(i - 1));
                 }
             });
             cat.setText(prognames[position]);

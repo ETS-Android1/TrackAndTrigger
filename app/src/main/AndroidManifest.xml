@@ -13,17 +13,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackAndTrigger"
         tools:replace="android:theme">
-        <activity android:name=".item"></activity>
+        <activity android:name=".To_Do"/>
+        <activity android:name=".To_Do_List" />
+        <activity android:name=".item" />
         <activity android:name=".Groceries" />
-
         <activity android:name=".Category" />
-        <activity android:name=".PhoneNumber">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -36,6 +30,7 @@
         <activity android:name=".Profession" />
         <activity android:name=".Login" />
         <activity android:name=".Dashboard" />
+        <activity android:name=".PhoneNumber" />
 
         <meta-data
             android:name="preloaded_fonts"

@@ -89,10 +89,17 @@ public class Dashboard extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (list.get(i).equals("Groceries")) {
-                    Intent dashint = new Intent(Dashboard.this, Groceries.class);
-                    dashint.putExtra("name", name);
-                    startActivity(dashint);
+
+                if (list.get(i).equals("To Do List")) {
+                    Intent ToDo = new Intent(Dashboard.this, To_Do.class);
+                    ToDo.putExtra("name", name);
+                    startActivity(ToDo);
+                }
+                else
+                {
+                    Intent Groceries = new Intent(Dashboard.this,Groceries.class);
+                    Groceries.putExtra("name",name);
+                    Groceries.putExtra("Item",list.get(i));
                 }
 
             }
@@ -106,8 +113,10 @@ public class Dashboard extends AppCompatActivity {
                 if (s.isEmpty())
                     Toast.makeText(Dashboard.this, "Enter Category", Toast.LENGTH_SHORT).show();
                 else {
-                    if (name != null)
+                    if (name != null) {
                         FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
+                        FirebaseDatabase.getInstance().getReference().child(name).child("In"+s).setValue("In"+s);
+                    }
                 }
             }
         });

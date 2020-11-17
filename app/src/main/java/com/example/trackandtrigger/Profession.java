@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+
 public class Profession extends AppCompatActivity {
     RadioGroup radiogroup;
     RadioButton hm,wk,bh,js;
@@ -43,16 +45,42 @@ public class Profession extends AppCompatActivity {
                     prof="Working Professional";
              Intent intent=getIntent();
             String name=intent.getStringExtra("name");
+            String email=intent.getStringExtra("EmailID");
+            String phone=intent.getStringExtra("Phone");
+            String Google=intent.getStringExtra("Google");
             if(name !=null) {
+                FirebaseDatabase.getInstance().getReference().child(name).setValue(name);
+                HashMap<String, Object> map = new HashMap<String, Object>();
+                map.put("Email", email);
+                map.put("PhoneNo", phone);
+                map.put("Name", name);
+                FirebaseDatabase.getInstance().getReference().child(name).updateChildren(map);
+                HashMap<String, Object> map1 = new HashMap<String, Object>();
+                map.put("Groceries", "Groceries");
+                map.put("Kitchen Appliances", "Kitchen Appliances");
+                map.put("Household maintainence", "HouseHold maintainence");
+                map.put("To Do List","To Do List");
+                if (name != null) {
+                    System.out.println("dashboard" + name);
+                    FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
+                    FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map);
+                    FirebaseDatabase.getInstance().getReference().child(name).child("InGroceries").setValue("InGroceries");
+                    FirebaseDatabase.getInstance().getReference().child(name).child("InKitchen Appliances").setValue("InKitchen Appliances");
+                    FirebaseDatabase.getInstance().getReference().child(name).child("InHousehold maintainence").setValue("InHousehold maintainence");
+                    FirebaseDatabase.getInstance().getReference().child(name).child("InTo Do List").setValue("InTo Do List");
+                }
                 FirebaseDatabase.getInstance().getReference().child(name).child("profession").setValue(prof);
             }
-                Intent profint=new Intent(Profession.this,Login.class);
-                profint.putExtra("profename",name);
-
-                profint.putExtra("profession",prof);
-
-                startActivity(profint);
-                finish();
+            if(Google.equals("Yes"))
+            {
+                 Intent Dashboard = new Intent(Profession.this, Dashboard.class);
+                 Dashboard.putExtra("profename",name);
+                 finish();
+            }
+            Intent profint=new Intent(Profession.this,Login.class);
+            profint.putExtra("profename",name);
+            startActivity(profint);
+            finish();
             }
         });
 
