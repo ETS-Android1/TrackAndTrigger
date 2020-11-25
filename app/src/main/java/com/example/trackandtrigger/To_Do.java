@@ -54,7 +54,7 @@ public class To_Do extends AppCompatActivity {
             }
         });
         if (name != null) {
-            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("InTo Do List");
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List");
             mref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {

@@ -25,7 +25,7 @@ import java.util.ArrayList;
 public class Dashboard extends AppCompatActivity {
     ListView lv;
     TextView catname;
-    String name;
+    String name,email;
     String name1;
     FirebaseAuth Auth;
     String[] Username = new String[4];
@@ -44,7 +44,8 @@ public class Dashboard extends AppCompatActivity {
             name = intent.getStringExtra("name");
         lv = findViewById(R.id.lv);
         catname = findViewById(R.id.catname);
-        String email = Auth.getCurrentUser().getEmail().toString();
+        if(Auth.getCurrentUser().getEmail()!=null)
+        email = Auth.getCurrentUser().getEmail().toString();
 
         DatabaseReference reference;
         reference = FirebaseDatabase.getInstance().getReference();
@@ -75,7 +76,7 @@ public class Dashboard extends AppCompatActivity {
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     list.clear();
                     for (DataSnapshot snap : snapshot.getChildren())
-                        list.add(snap.getValue().toString());
+                        list.add(snap.getKey().toString());
                     adapter.notifyDataSetChanged();
 
                 }
@@ -115,7 +116,7 @@ public class Dashboard extends AppCompatActivity {
                 else {
                     if (name != null) {
                         FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
-                        FirebaseDatabase.getInstance().getReference().child(name).child("In"+s).setValue("In"+s);
+                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
                     }
                 }
             }
@@ -129,7 +130,8 @@ public class Dashboard extends AppCompatActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        String email = Auth.getCurrentUser().getEmail().toString();
+        if(Auth.getCurrentUser().getEmail()!=null)
+        email = Auth.getCurrentUser().getEmail().toString();
         DatabaseReference reference;
         reference = FirebaseDatabase.getInstance().getReference();
         reference.orderByChild("Email").equalTo(email).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -146,7 +148,7 @@ public class Dashboard extends AppCompatActivity {
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             list.clear();
                             for (DataSnapshot snap : snapshot.getChildren())
-                                list.add(snap.getValue().toString());
+                                list.add(snap.getKey().toString());
                             adapter.notifyDataSetChanged();
 
                         }
@@ -172,10 +174,17 @@ public class Dashboard extends AppCompatActivity {
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                if (list.get(i).equals("Groceries")) {
-                    Intent dashint = new Intent(Dashboard.this, Groceries.class);
-                    dashint.putExtra("name", name1);
-                    startActivity(dashint);
+
+                if (list.get(i).equals("To Do List")) {
+                    Intent ToDo = new Intent(Dashboard.this, To_Do.class);
+                    ToDo.putExtra("name", name);
+                    startActivity(ToDo);
+                }
+                else
+                {
+                    Intent Groceries = new Intent(Dashboard.this,Groceries.class);
+                    Groceries.putExtra("name",name);
+                    Groceries.putExtra("Item",list.get(i));
                 }
 
             }

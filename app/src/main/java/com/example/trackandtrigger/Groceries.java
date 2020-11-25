@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -50,6 +51,7 @@ public class Groceries extends AppCompatActivity {
             public void onClick(View view) {
                 Intent grointent = new Intent(Groceries.this, item.class);
                 grointent.putExtra("name", name);
+                grointent.putExtra("Item",Item);
                 startActivity(grointent);
             }
         });
@@ -77,7 +79,42 @@ public class Groceries extends AppCompatActivity {
                 }
             });
         }
+
+        ArrayList<String> shItem=new ArrayList<String>();
+        gro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                if (name != null) {
+                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(progname.get(i));
+
+                    mref.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            shItem.clear();
+                            for (DataSnapshot snap : snapshot.getChildren())
+                                shItem.add(snap.getValue().toString());
+                            ad.notifyDataSetChanged();
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+                Intent shareint = new Intent(Groceries.this, Share.class);
+                shareint.putStringArrayListExtra("sharemap", shItem);
+                startActivity(shareint);
+
+
+            }
+        });
+
     }
+
+
 
     public class adapter extends ArrayAdapter<String> {
         private final Activity context;

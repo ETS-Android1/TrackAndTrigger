@@ -1,49 +1,55 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".item">
+    tools:context=".Share">
+
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="30sp"
+        android:layout_marginLeft="50sp"
         android:paddingLeft="50sp"
-        android:text="Create a new Item "
+        android:text="Item Details "
         android:textColor="@color/black"
         android:textSize="30sp"></TextView>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/image"
+        android:id="@+id/imageview"
         android:layout_marginTop="10sp"
         ></ImageView>
 
-    <EditText
+    <TextView
         android:id="@+id/itemtext"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:layout_marginVertical="50sp"
         android:layout_marginLeft="100sp"
         android:layout_marginTop="20sp"
-        android:hint="Enter the Item"></EditText>
+        android:textSize="25sp"
+        android:hint="Item Name"></TextView>
 
-    <EditText
+    <TextView
         android:id="@+id/quantext"
         android:layout_width="200sp"
         android:layout_height="wrap_content"
         android:layout_marginLeft="100sp"
-        android:hint="Quantity"></EditText>
+        android:textSize="25sp"
+        android:hint="Quantity"></TextView>
 
     <Button
-        android:id="@+id/addbtn"
+        android:id="@+id/sharebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20sp"
+        android:layout_marginTop="70sp"
         android:layout_marginLeft="150sp"
-        android:text="Add"></Button>
+        android:text="Share"></Button>
+
 
 
 </LinearLayout>

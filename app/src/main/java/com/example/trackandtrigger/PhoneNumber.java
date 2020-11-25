@@ -46,7 +46,7 @@ public class PhoneNumber extends AppCompatActivity {
                      Auth.putExtra("PhoneNO", phone);
                      Auth.putExtra("EmailID", mail);
                      Auth.putExtra("Name", Name);
-                     Auth.putExtra("Google",Google);
+                     Auth.putExtra("Google","Yes");
                      startActivity(Auth);
                 }
             }

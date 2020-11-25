@@ -56,18 +56,14 @@ public class Profession extends AppCompatActivity {
                 map.put("Name", name);
                 FirebaseDatabase.getInstance().getReference().child(name).updateChildren(map);
                 HashMap<String, Object> map1 = new HashMap<String, Object>();
-                map.put("Groceries", "Groceries");
-                map.put("Kitchen Appliances", "Kitchen Appliances");
-                map.put("Household maintainence", "HouseHold maintainence");
-                map.put("To Do List","To Do List");
+                map1.put("Groceries", "Groceries");
+                map1.put("Kitchen Appliances", "Kitchen Appliances");
+                map1.put("Household maintainence", "HouseHold maintainence");
+                map1.put("To Do List","To Do List");
                 if (name != null) {
                     System.out.println("dashboard" + name);
                     FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
-                    FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map);
-                    FirebaseDatabase.getInstance().getReference().child(name).child("InGroceries").setValue("InGroceries");
-                    FirebaseDatabase.getInstance().getReference().child(name).child("InKitchen Appliances").setValue("InKitchen Appliances");
-                    FirebaseDatabase.getInstance().getReference().child(name).child("InHousehold maintainence").setValue("InHousehold maintainence");
-                    FirebaseDatabase.getInstance().getReference().child(name).child("InTo Do List").setValue("InTo Do List");
+                    FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").updateChildren(map1);
                 }
                 FirebaseDatabase.getInstance().getReference().child(name).child("profession").setValue(prof);
             }
@@ -75,12 +71,15 @@ public class Profession extends AppCompatActivity {
             {
                  Intent Dashboard = new Intent(Profession.this, Dashboard.class);
                  Dashboard.putExtra("profename",name);
+                 startActivity(Dashboard);
                  finish();
             }
-            Intent profint=new Intent(Profession.this,Login.class);
-            profint.putExtra("profename",name);
-            startActivity(profint);
-            finish();
+            else {
+                Intent profint = new Intent(Profession.this, Login.class);
+                profint.putExtra("profename", name);
+                startActivity(profint);
+                finish();
+            }
             }
         });
 
