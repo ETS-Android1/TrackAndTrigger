@@ -116,7 +116,6 @@ public class Dashboard extends AppCompatActivity {
                 else {
                     if (name != null) {
                         FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
-                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(s).setValue(s);
                     }
                 }
             }

@@ -56,7 +56,7 @@ public class Groceries extends AppCompatActivity {
             }
         });
         if (name != null) {
-            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("In"+Item);
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item);
             mref.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -106,6 +106,8 @@ public class Groceries extends AppCompatActivity {
                 }
                 Intent shareint = new Intent(Groceries.this, Share.class);
                 shareint.putStringArrayListExtra("sharemap", shItem);
+                shareint.putExtra("name", name);
+                shareint.putExtra("Item", Item);
                 startActivity(shareint);
 
 
@@ -145,7 +147,7 @@ public class Groceries extends AppCompatActivity {
                     int i = Integer.parseInt(inc.getText().toString());
                     inc.setText(String.valueOf(i + 1));
                     if (name != null)
-                        FirebaseDatabase.getInstance().getReference().child(name).child("In"+Item).child(prognames[position]).setValue(String.valueOf(i + 1));
+                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(prognames[position]).child("Quantity").setValue(String.valueOf(i + 1));
                 }
             });
             minus.setOnClickListener(new View.OnClickListener() {
@@ -154,7 +156,7 @@ public class Groceries extends AppCompatActivity {
                     int i = Integer.parseInt(inc.getText().toString());
                     inc.setText(String.valueOf(i - 1));
                     if (name != null)
-                        FirebaseDatabase.getInstance().getReference().child(name).child("In"+Item).child(prognames[position]).setValue(String.valueOf(i - 1));
+                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(prognames[position]).child("Quantity").setValue(String.valueOf(i - 1));
                 }
             });
             cat.setText(prognames[position]);
