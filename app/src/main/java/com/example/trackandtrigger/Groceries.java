@@ -6,10 +6,8 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -85,41 +83,6 @@ public class Groceries extends AppCompatActivity {
         }
 
         ArrayList<String> shItem=new ArrayList<String>();
-        gro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                System.out.println(name + "" + Item + "" + frname[i]);
-                DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(frname[i]);
-                    System.out.println(progname.get(i));
-                    mref.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            shItem.clear();
-                            for (DataSnapshot snap : snapshot.getChildren())
-                                shItem.add(snap.getValue().toString());
-                            ad.notifyDataSetChanged();
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    Intent shareint = new Intent(Groceries.this, Share.class);
-                    shareint.putStringArrayListExtra("sharemap", shItem);
-                    shareint.putExtra("name", name);
-                    shareint.putExtra("Item", Item);
-                    startActivity(shareint);
-
-
-
-
-            }
-        });
-
     }
 
     @Override
@@ -160,51 +123,12 @@ public class Groceries extends AppCompatActivity {
                     frname = progname.toArray(new String[progname.size()]);
                     ad = new adapter(Groceries.this, frname, quan);
                     gro.setAdapter(ad);
-
                 }
-
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
-
                 }
             });
         }
-
-        ArrayList<String> shItem=new ArrayList<String>();
-        gro.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-
-                    System.out.println(name + "" + Item + "" + frname[i]);
-                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(frname[i]);
-                    System.out.println(progname.get(i));
-                    mref.addValueEventListener(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot snapshot) {
-                            shItem.clear();
-                            for (DataSnapshot snap : snapshot.getChildren())
-                                shItem.add(snap.getValue().toString());
-                            ad.notifyDataSetChanged();
-
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError error) {
-
-                        }
-                    });
-                    Intent shareint = new Intent(Groceries.this, Share.class);
-                    shareint.putStringArrayListExtra("sharemap", shItem);
-                    shareint.putExtra("name", name);
-                    shareint.putExtra("Item", Item);
-                    startActivity(shareint);
-
-
-
-            }
-        });
-
     }
 
     public class adapter extends ArrayAdapter<String> {
@@ -223,33 +147,10 @@ public class Groceries extends AppCompatActivity {
         @NonNull
         @Override
         public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-
             LayoutInflater inflater = context.getLayoutInflater();
             View view = inflater.inflate(R.layout.activity_category, null, true);
-            Button plus = (Button) view.findViewById(R.id.plus);
-            Button minus = (Button) view.findViewById(R.id.minus);
             TextView cat = view.findViewById(R.id.cat);
             TextView inc = view.findViewById(R.id.inc);
-            plus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    String str = inc.getText().toString().trim();
-                    System.out.println(str);
-                    int i = Integer.parseInt(inc.getText().toString().trim());
-                    inc.setText(String.valueOf(i + 1));
-                    if (name != null)
-                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(prognames[position]).child("Quantity").setValue(String.valueOf(i + 1));
-                }
-            });
-            minus.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    int i = Integer.parseInt(inc.getText().toString().trim());
-                    inc.setText(String.valueOf(i - 1));
-                    if (name != null)
-                        FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(prognames[position]).child("Quantity").setValue(String.valueOf(i - 1));
-                }
-            });
             ArrayList<String> shItem=new ArrayList<String>();
             cat.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -269,20 +170,12 @@ public class Groceries extends AppCompatActivity {
                                 shareint.putExtra("name", name);
                                 shareint.putExtra("Item", Item);
                                 startActivity(shareint);
-
-
                             }
-
                             @Override
                             public void onCancelled(@NonNull DatabaseError error) {
-
                             }
                         });
-
-
-
                     }
-
                 }
             });
             cat.setText(prognames[position]);
