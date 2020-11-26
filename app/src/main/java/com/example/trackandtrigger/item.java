@@ -22,7 +22,7 @@ import com.theartofdev.edmodo.cropper.CropImageView;
 import java.util.HashMap;
 
 public class item extends AppCompatActivity {
-    Button btn;
+    Button btn,choose_button;
     String name,Item;
     EditText nameText, quanText;
     private ImageView image;
@@ -35,13 +35,22 @@ public class item extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_item);
         reference= FirebaseStorage.getInstance().getReference();
-        btn = (Button) findViewById(R.id.addbtn);
-        image =findViewById(R.id.image);
+        choose_button=findViewById(R.id.Choose_image);//
+        btn = (Button) findViewById(R.id.addbtn);//upload
+        image =findViewById(R.id.image);//image
         nameText = (EditText) findViewById(R.id.itemtext);
         quanText = (EditText) findViewById(R.id.quantext);
         Intent itemint = getIntent();
         name = itemint.getStringExtra("name");
         Item = itemint.getStringExtra("Item");
+
+        choose_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                opengallery();
+            }
+        });
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -50,7 +59,7 @@ public class item extends AppCompatActivity {
 
                 if (Title != null&& Quan!=null) {
                     FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(nameText.getText().toString()).setValue(quanText.getText().toString());
-                    StorageReference filepath = reference.child("blog_image").child(image_uri.getLastPathSegment());
+                    StorageReference filepath = reference.child(image_uri.getLastPathSegment());
                     filepath.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
@@ -76,8 +85,6 @@ public class item extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
-
     }
 
     @Override

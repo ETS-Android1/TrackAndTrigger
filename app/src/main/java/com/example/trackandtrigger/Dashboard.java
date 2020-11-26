@@ -101,6 +101,7 @@ public class Dashboard extends AppCompatActivity {
                     Intent Groceries = new Intent(Dashboard.this,Groceries.class);
                     Groceries.putExtra("name",name);
                     Groceries.putExtra("Item",list.get(i));
+                    startActivity(Groceries);
                 }
 
             }
@@ -184,6 +185,7 @@ public class Dashboard extends AppCompatActivity {
                     Intent Groceries = new Intent(Dashboard.this,Groceries.class);
                     Groceries.putExtra("name",name);
                     Groceries.putExtra("Item",list.get(i));
+                    startActivity(Groceries);
                 }
 
             }

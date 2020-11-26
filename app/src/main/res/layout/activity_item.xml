@@ -14,12 +14,13 @@
         android:text="Create a new Item "
         android:textColor="@color/black"
         android:textSize="30sp"></TextView>
+
     <ImageView
+        android:id="@+id/image"
         android:layout_width="match_parent"
         android:layout_height="300dp"
-        android:id="@+id/image"
         android:layout_marginTop="10sp"
-        ></ImageView>
+        android:background="@drawable/common_google_signin_btn_icon_dark"></ImageView>
 
     <EditText
         android:id="@+id/itemtext"
@@ -44,6 +45,12 @@
         android:layout_marginTop="20sp"
         android:layout_marginLeft="150sp"
         android:text="Add"></Button>
+
+    <Button
+        android:id="@+id/Choose_image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Choose Image" />
 
 
 </LinearLayout>

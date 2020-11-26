@@ -8,10 +8,10 @@
 
     <EditText
         android:id="@+id/Title"
-        android:layout_width="262dp"
-        android:layout_height="40dp"
+        android:layout_width="259dp"
+        android:layout_height="54dp"
         android:layout_marginStart="50dp"
-        android:layout_marginTop="188dp"
+        android:layout_marginTop="192dp"
         android:layout_marginEnd="99dp"
         android:hint="Title"
         android:textColor="#000000"
@@ -26,9 +26,8 @@
         android:id="@+id/Time"
         android:layout_width="133dp"
         android:layout_height="63dp"
-        android:layout_marginStart="222dp"
-        android:layout_marginEnd="56dp"
-        android:layout_marginBottom="380dp"
+        android:layout_marginEnd="96dp"
+        android:layout_marginBottom="388dp"
         android:background="@android:drawable/editbox_background"
         android:drawableTop="@drawable/timer"
         android:drawablePadding="16dp"
@@ -36,7 +35,56 @@
         android:textColorHint="#000000"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="53dp"
+        android:layout_marginTop="134dp"
+        android:layout_marginEnd="238dp"
+        android:text="Remainder:"
+        android:textColor="#020000"
+        android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="59dp"
+        android:layout_marginBottom="404dp"
+        android:text="Enter Time:"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="60dp"
+        android:layout_marginBottom="340dp"
+        android:text="Enter Date:"
+        android:textColor="#000000"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/Date"
+        android:layout_width="129dp"
+        android:layout_height="41dp"
+        android:layout_marginEnd="99dp"
+        android:layout_marginBottom="331dp"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:text="Select date"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
