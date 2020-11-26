@@ -2,7 +2,12 @@ package com.example.trackandtrigger;
 
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.NotificationChannel;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -76,6 +81,27 @@ public class To_Do extends AppCompatActivity {
 
                 }
             });
+        }
+
+        createNotificationChannel();
+        Intent broadcast_intent = new Intent(To_Do.this,RemainderBroadcast.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(To_Do.this,0,broadcast_intent,0);
+        AlarmManager alarmManager = (AlarmManager)getSystemService(ALARM_SERVICE);
+        long current_time = System.currentTimeMillis();
+    }
+
+    private void createNotificationChannel()
+    {
+        if(Build.VERSION.SDK_INT>=Build.VERSION_CODES.O)
+        {
+            CharSequence Name = " Praneet";
+            String description = "Hello World";
+            int importance = NotificationManager.IMPORTANCE_DEFAULT;
+            NotificationChannel channel = new NotificationChannel("notify",Name,importance);
+            channel.setDescription(description);
+
+            NotificationManager notificationManager = getSystemService(NotificationManager.class);
+            notificationManager.createNotificationChannel(channel);
         }
     }
 

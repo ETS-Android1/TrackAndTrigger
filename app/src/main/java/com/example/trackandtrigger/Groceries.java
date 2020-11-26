@@ -89,7 +89,8 @@ public class Groceries extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(progname.get(i));
+                System.out.println(name + "" + Item + "" + frname[i]);
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(frname[i]);
                     System.out.println(progname.get(i));
                     mref.addValueEventListener(new ValueEventListener() {
                         @Override
@@ -174,30 +175,30 @@ public class Groceries extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
 
-                DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(progname.get(i));
-                System.out.println(progname.get(i));
-                mref.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot snapshot) {
-                        shItem.clear();
-                        for (DataSnapshot snap : snapshot.getChildren())
-                            shItem.add(snap.getValue().toString());
-                        ad.notifyDataSetChanged();
+                    System.out.println(name + "" + Item + "" + frname[i]);
+                    DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(frname[i]);
+                    System.out.println(progname.get(i));
+                    mref.addValueEventListener(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            shItem.clear();
+                            for (DataSnapshot snap : snapshot.getChildren())
+                                shItem.add(snap.getValue().toString());
+                            ad.notifyDataSetChanged();
 
 
-                    }
+                        }
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
 
-                    }
-                });
-                Intent shareint = new Intent(Groceries.this, Share.class);
-                shareint.putStringArrayListExtra("sharemap", shItem);
-                shareint.putExtra("name", name);
-                shareint.putExtra("Item", Item);
-                startActivity(shareint);
-
+                        }
+                    });
+                    Intent shareint = new Intent(Groceries.this, Share.class);
+                    shareint.putStringArrayListExtra("sharemap", shItem);
+                    shareint.putExtra("name", name);
+                    shareint.putExtra("Item", Item);
+                    startActivity(shareint);
 
 
 
@@ -247,6 +248,41 @@ public class Groceries extends AppCompatActivity {
                     inc.setText(String.valueOf(i - 1));
                     if (name != null)
                         FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(prognames[position]).child("Quantity").setValue(String.valueOf(i - 1));
+                }
+            });
+            ArrayList<String> shItem=new ArrayList<String>();
+            cat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (name != null) {
+                        System.out.println(name + "" + Item + "" );
+                        DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(cat.getText().toString().trim());
+                        mref.addValueEventListener(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                shItem.clear();
+                                for (DataSnapshot snap : snapshot.getChildren())
+                                    shItem.add(snap.getValue().toString());
+                                ad.notifyDataSetChanged();
+                                Intent shareint = new Intent(Groceries.this, Share.class);
+                                shareint.putStringArrayListExtra("sharemap", shItem);
+                                shareint.putExtra("name", name);
+                                shareint.putExtra("Item", Item);
+                                startActivity(shareint);
+
+
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError error) {
+
+                            }
+                        });
+
+
+
+                    }
+
                 }
             });
             cat.setText(prognames[position]);

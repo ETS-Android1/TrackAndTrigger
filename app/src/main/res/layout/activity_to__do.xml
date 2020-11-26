@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="77dp"
         android:layout_marginBottom="104dp"
-        android:text="Add Remiander"
+        android:text="Add Remainder"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
