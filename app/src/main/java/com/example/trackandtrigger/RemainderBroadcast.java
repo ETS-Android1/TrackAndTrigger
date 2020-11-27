@@ -11,14 +11,9 @@ public class RemainderBroadcast extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent)
     {
-        NotificationCompat.Builder builder = new NotificationCompat.Builder(context,"notify")
-                .setSmallIcon(R.drawable.authenticate)
-                .setContentTitle("Remainder")
-                .setContentText("This is a remainder")
-                .setPriority(NotificationCompat.PRIORITY_DEFAULT);
-
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
-
-        notificationManager.notify(200,builder.build());
+        String message = intent.getStringExtra("Title");
+        NotificationHelper notificationHelper = new NotificationHelper(context);
+        NotificationCompat.Builder nb = notificationHelper.getChannelNotification("Track And Trigger",message);
+        notificationHelper.getManager().notify(1,nb.build());
     }
 }

@@ -6,7 +6,10 @@ import androidx.fragment.app.DialogFragment;
 import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.PendingIntent;
 import android.app.TimePickerDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -32,13 +35,17 @@ public class To_Do_List extends AppCompatActivity {
     int Hour, Min;
     EditText etDate,Title;
     String date,time,name,heading;
+    int Year,Month,Day;
     private Button add;
     DatePickerDialog.OnDateSetListener setListener;
+    NotificationHelper mNotificationHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to__do__list);
+        mNotificationHelper = new NotificationHelper(this);
+
         Title = findViewById(R.id.Title);
         etDate = findViewById(R.id.Date);
         Calendar calendar= Calendar.getInstance();
@@ -64,6 +71,7 @@ public class To_Do_List extends AppCompatActivity {
                         } catch (ParseException e) {
                             e.printStackTrace();
                         }
+
                     }
                 },12,0,false);
                 timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -78,9 +86,12 @@ public class To_Do_List extends AppCompatActivity {
                 DatePickerDialog datePickerDialog = new DatePickerDialog(
                         To_Do_List.this, new DatePickerDialog.OnDateSetListener() {
                     @Override
-                    public void onDateSet(DatePicker view, int year, int month, int day) {
+                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
                         month = month +1;
-                        date = day + "/" + month + "/" + year;
+                        Year = year;
+                        Month = month;
+                        Day = dayOfMonth;
+                        date = Day + "/" + Month + "/" + Year;
                         etDate.setText(date);
                     }
                 },year,month,day);
@@ -94,10 +105,26 @@ public class To_Do_List extends AppCompatActivity {
 
                 heading = Title.getText().toString().trim();
                 FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List").child(heading).setValue(time_date);
+                Hour--;
+                Calendar c = Calendar.getInstance();
+                c.set(Calendar.HOUR_OF_DAY,Hour);
+                c.set(Calendar.MINUTE,Min);
+                c.set(Calendar.SECOND,0);
+                startAlarm(c);
+
                 onBackPressed();
             }
         });
 
+    }
+
+    public void startAlarm(Calendar c){
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        Intent intent = new Intent(this,RemainderBroadcast.class);
+        intent.putExtra("Title","Remainder: "+heading);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
+
+        alarmManager.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pendingIntent);
     }
 }
 
