@@ -2,5 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/alegreya_bold</item>
+        <item>@font/allan_bold</item>
+        <item>@font/allan_bold_1</item>
+        <item>@font/allan_bold_2</item>
     </array>
 </resources>

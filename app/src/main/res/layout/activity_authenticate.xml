@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light"
     tools:context=".Authenticate">
 
     <EditText
@@ -11,14 +12,15 @@
         android:layout_width="400dp"
         android:layout_height="70dp"
         android:layout_marginStart="100dp"
-        android:layout_marginTop="268dp"
+        android:layout_marginTop="304dp"
         android:layout_marginEnd="101dp"
         android:background="@color/black"
         android:ems="10"
-        android:hint="OTP sent to Mobile"
+        android:hint="                     OTP sent to Mobile"
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
+        android:textSize="21sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -28,14 +30,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="204dp"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="136dp"
         android:layout_marginEnd="203dp"
-        android:fontFamily="@font/alegreya_bold"
+        android:fontFamily="@font/allan_bold_2"
         android:text="Authenticate"
         android:textColor="#0E0000"
         android:textSize="36sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.504"
+        app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
@@ -45,7 +47,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="95dp"
         android:layout_marginEnd="96dp"
-        android:layout_marginBottom="320dp"
+        android:layout_marginBottom="276dp"
         android:text="Verify"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,13 +59,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginBottom="40dp"
-        android:text="An OTP has been sent to your mobile . Please enter the OTP."
+        android:layout_marginBottom="64dp"
+        android:text="An OTP has been sent to your mobile . "
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toTopOf="@+id/PhVerify"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
@@ -73,8 +75,24 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="181dp"
         android:layout_marginEnd="182dp"
-        android:layout_marginBottom="64dp"
+        android:layout_marginBottom="196dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="138dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="138dp"
+        android:text="TextView"
+        android:textColor="#000000"
+        android:textSize="22sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4"
+        tools:text="Enter the OTP" />
 </androidx.constraintlayout.widget.ConstraintLayout>

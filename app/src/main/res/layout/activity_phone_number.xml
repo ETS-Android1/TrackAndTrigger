@@ -4,27 +4,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light"
     tools:context=".PhoneNumber">
 
     <TextView
         android:id="@+id/PhoneEnter"
         android:layout_width="263dp"
         android:layout_height="39dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="204dp"
-        android:layout_marginEnd="132dp"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="236dp"
+        android:layout_marginEnd="128dp"
         android:text="Enter your Phone No."
         android:textColor="#000000"
         android:textSize="24sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/phno"
-        android:layout_width="304dp"
-        android:layout_height="45dp"
+        android:layout_width="347dp"
+        android:layout_height="46dp"
         android:layout_marginStart="21dp"
         android:layout_marginEnd="86dp"
         android:layout_marginBottom="392dp"
@@ -44,12 +44,12 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="150dp"
         android:layout_marginEnd="168dp"
-        android:layout_marginBottom="296dp"
+        android:layout_marginBottom="300dp"
         android:text="Generate OTP"
         app:backgroundTint="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.326"
+        app:layout_constraintHorizontal_bias="0.576"
         app:layout_constraintStart_toStartOf="parent" />
 
     <ProgressBar
@@ -57,11 +57,24 @@
         style="?android:attr/progressBarStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="174dp"
-        android:layout_marginEnd="189dp"
-        android:layout_marginBottom="177dp"
+        android:layout_marginEnd="180dp"
+        android:layout_marginBottom="220dp"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="21dp"
+        android:layout_marginTop="158dp"
+        android:layout_marginEnd="270dp"
+        android:fontFamily="@font/allan_bold"
+        android:text="Step 2:"
+        android:textColor="#000000"
+        android:textSize="50sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>

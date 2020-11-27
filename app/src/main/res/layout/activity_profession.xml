@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/holo_orange_light"
     android:orientation="vertical"
-    android:background="@drawable/app_back"
     tools:context=".Profession">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="100dp"
+        android:fontFamily="@font/allan_bold"
         android:text="Choose your profession"
-        android:textSize="30sp"
         android:textColor="@color/black"
-        ></TextView>
+        android:textSize="40sp"></TextView>
+
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -41,6 +42,7 @@
                 android:checked="false"
                 android:text="working professionals,"
                 android:textSize="20sp" />
+
             <RadioButton
                 android:id="@+id/jk"
                 android:layout_width="match_parent"
@@ -48,6 +50,7 @@
                 android:checked="false"
                 android:text="job-seekers"
                 android:textSize="20sp" />
+
             <RadioButton
                 android:id="@+id/bc"
                 android:layout_width="match_parent"
@@ -60,11 +63,11 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Next"
         android:layout_marginTop="50sp"
-        android:id="@+id/next"
+        android:text="Next"
 
         ></Button>
 
