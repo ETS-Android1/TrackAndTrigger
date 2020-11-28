@@ -129,6 +129,52 @@ public class Groceries extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        setContentView(R.layout.activity_groceries);
+        gro = (ListView) findViewById(R.id.list);
+        btn = (Button) findViewById(R.id.btn);
+        Intent intent = getIntent();
+        name = intent.getStringExtra("name");
+        Item = intent.getStringExtra("Item");
+        progname = new ArrayList<String>();
+        progquan = new ArrayList<String>();
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent grointent = new Intent(Groceries.this, item.class);
+                grointent.putExtra("name", name);
+                grointent.putExtra("Item",Item);
+                startActivity(grointent);
+            }
+        });
+        if (name != null) {
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item);
+            mref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    progname.clear();
+                    progquan.clear();
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        for(DataSnapshot snap1 :snap.getChildren()){
+                            if(snap1.getKey().toString().equals("Quantity"))
+                                progquan.add(snap1.getValue().toString());
+                        }
+                        progname.add(snap.getKey().toString());
+                    }
+                    quan = progquan.toArray(new String[progquan.size()]);
+                    frname = progname.toArray(new String[progname.size()]);
+                    ad = new adapter(Groceries.this, frname, quan);
+                    gro.setAdapter(ad);
+                }
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+                }
+            });
+        }
+    }
+
     public class adapter extends ArrayAdapter<String> {
         private final Activity context;
         private final String prognames[];

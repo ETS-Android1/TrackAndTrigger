@@ -91,12 +91,8 @@ public class To_Do_List extends AppCompatActivity {
                     return;
                 }
                 FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List").child(heading).setValue(time_date);
-                Hour--;
-                Calendar c = Calendar.getInstance();
-                c.set(Calendar.HOUR_OF_DAY,Hour);
-                c.set(Calendar.MINUTE,Min);
-                c.set(Calendar.SECOND,0);
-                startAlarm(c);
+
+
 
                 onBackPressed();
             }
@@ -105,14 +101,7 @@ public class To_Do_List extends AppCompatActivity {
     }
 
 
-    public void startAlarm(Calendar c){
-        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        Intent intent = new Intent(this,RemainderBroadcast.class);
-        intent.putExtra("Title","Remainder: "+heading);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this,1,intent,0);
 
-        alarmManager.setExact(AlarmManager.RTC_WAKEUP,c.getTimeInMillis(),pendingIntent);
-    }
 }
 
 
