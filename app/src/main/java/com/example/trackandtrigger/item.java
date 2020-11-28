@@ -57,8 +57,18 @@ public class item extends AppCompatActivity {
                 String Title=nameText.getText().toString().trim();
                 String Quan = quanText.getText().toString().trim();
 
-                if (Title != null&& Quan!=null) {
-                    FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(nameText.getText().toString()).setValue(quanText.getText().toString());
+                if(Title == null)
+                {
+                    nameText.setError("Enter Title");
+                    return;
+                }
+                if(Quan == null)
+                {
+                    quanText.setError("Enter Quantity");
+                    return;
+                }
+
+                if (name!=null && Title != null&& Quan!=null) {
                     StorageReference filepath = reference.child(image_uri.getLastPathSegment());
                     filepath.putFile(image_uri).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
                         @Override
@@ -73,6 +83,7 @@ public class item extends AppCompatActivity {
                                     Item_Map.put("Item_Name",Title);
                                     Item_Map.put("Quantity",Quan);
                                     Item_Map.put("Image",downloaduri.toString());
+                                    System.out.println(downloaduri.toString());
                                     FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child(Item).child(Title).updateChildren(Item_Map);
                                 }
                             });

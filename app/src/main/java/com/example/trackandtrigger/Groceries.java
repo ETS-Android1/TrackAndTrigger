@@ -81,8 +81,6 @@ public class Groceries extends AppCompatActivity {
                 }
             });
         }
-
-        ArrayList<String> shItem=new ArrayList<String>();
     }
 
     @Override

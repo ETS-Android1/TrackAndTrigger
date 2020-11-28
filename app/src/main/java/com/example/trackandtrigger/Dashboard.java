@@ -1,5 +1,8 @@
 package com.example.trackandtrigger;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -21,6 +24,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class Dashboard extends AppCompatActivity {
     ListView lv;
@@ -64,6 +68,7 @@ public class Dashboard extends AppCompatActivity {
         });
         if (name == null)
             name = Username[0];
+        System.out.println(name);
 
 
         list = new ArrayList<String>();
@@ -123,9 +128,9 @@ public class Dashboard extends AppCompatActivity {
         });
 
         lv.setAdapter(adapter);
-
-
     }
+
+
 
     @Override
     protected void onResume() {
@@ -171,6 +176,7 @@ public class Dashboard extends AppCompatActivity {
 
             }
         });
+        System.out.println(name);
         lv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

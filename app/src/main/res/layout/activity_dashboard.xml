@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/Text"
     android:layout_width="match_parent"
@@ -9,36 +10,55 @@
     tools:context=".Dashboard">
 
 
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/allan_bold"
+        android:text="             Dashboard"
+        android:textColor="#000000"
+        android:textSize="40dp" />
+
     <ListView
         android:id="@+id/lv"
         android:layout_width="match_parent"
         android:layout_height="318dp"
-        android:clickable="true" />
+        android:layout_marginTop="50dp"
+        android:background="@drawable/app_back"
+        android:cacheColorHint="#040000"
+        android:clickable="true"
+        android:textColor="@color/black" />
 
     <EditText
         android:id="@+id/catname"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
+        android:hint="Cateogory name"
         android:inputType="textPersonName"
-        android:hint="Cateogory name" />
+        android:textColor="@color/black"
+        android:textColorHint="#000000" />
 
     <Button
         android:id="@+id/addbtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="100sp"
-        android:layout_marginTop="50sp"
-        android:text="Add Category" />
+        android:layout_marginLeft="130dp"
+        android:layout_marginTop="10dp"
+        android:text="Add Category"
+        app:backgroundTint="#FF0000" />
 
     <Button
         android:id="@+id/Logout"
         android:layout_width="wrap_content"
-        android:layout_marginLeft="100sp"
-        android:layout_marginTop="50sp"
         android:layout_height="wrap_content"
-        android:text="Logout"
+        android:layout_marginLeft="160dp"
+        android:layout_marginTop="10dp"
+        android:onClick="Logout"
 
-        android:onClick="Logout" />
+        android:text="Logout"
+        app:backgroundTint="#FF0000" />
+
 
 </LinearLayout>

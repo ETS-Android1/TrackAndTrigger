@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
+    android:background="@drawable/app_back"
     tools:context=".PhoneNumber">
 
     <TextView
@@ -16,7 +16,7 @@
         android:layout_marginEnd="128dp"
         android:text="Enter your Phone No."
         android:textColor="#000000"
-        android:textSize="24sp"
+        android:textSize="24dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -73,7 +73,7 @@
         android:fontFamily="@font/allan_bold"
         android:text="Step 2:"
         android:textColor="#000000"
-        android:textSize="50sp"
+        android:textSize="50dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

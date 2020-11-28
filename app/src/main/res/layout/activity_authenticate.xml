@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_orange_light"
+    android:background="@drawable/app_back"
     tools:context=".Authenticate">
 
     <EditText
@@ -20,7 +20,7 @@
         android:inputType="textPersonName"
         android:textColor="#FFFFFF"
         android:textColorHint="#FFFFFF"
-        android:textSize="21sp"
+        android:textSize="21dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -35,7 +35,7 @@
         android:fontFamily="@font/allan_bold_2"
         android:text="Authenticate"
         android:textColor="#0E0000"
-        android:textSize="36sp"
+        android:textSize="36dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.544"
         app:layout_constraintStart_toStartOf="parent"
@@ -48,8 +48,10 @@
         android:layout_marginStart="95dp"
         android:layout_marginEnd="96dp"
         android:layout_marginBottom="276dp"
+        android:background="#FF0000"
         android:text="Verify"
-        android:textSize="18sp"
+        android:textSize="18dp"
+        app:backgroundTint="#FF0000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -62,7 +64,7 @@
         android:layout_marginBottom="64dp"
         android:text="An OTP has been sent to your mobile . "
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="22dp"
         app:layout_constraintBottom_toTopOf="@+id/PhVerify"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -90,7 +92,7 @@
         android:layout_marginEnd="138dp"
         android:text="TextView"
         android:textColor="#000000"
-        android:textSize="22sp"
+        android:textSize="22dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView4"

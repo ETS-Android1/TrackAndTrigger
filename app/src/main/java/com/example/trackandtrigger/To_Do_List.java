@@ -33,9 +33,8 @@ import java.util.TimeZone;
 public class To_Do_List extends AppCompatActivity {
     TextView Timer;
     int Hour, Min;
-    EditText etDate,Title;
-    String date,time,name,heading;
-    int Year,Month,Day;
+    EditText Title;
+    String time,name,heading;
     private Button add;
     DatePickerDialog.OnDateSetListener setListener;
     NotificationHelper mNotificationHelper;
@@ -47,11 +46,6 @@ public class To_Do_List extends AppCompatActivity {
         mNotificationHelper = new NotificationHelper(this);
 
         Title = findViewById(R.id.Title);
-        etDate = findViewById(R.id.Date);
-        Calendar calendar= Calendar.getInstance();
-        final int year=calendar.get(Calendar.YEAR);
-        final int month=calendar.get(Calendar.MONTH);
-        final int day=calendar.get(Calendar.DAY_OF_MONTH);
         name = getIntent().getStringExtra("name");
         add = findViewById(R.id.add);
         Timer = findViewById(R.id.Time);
@@ -79,31 +73,23 @@ public class To_Do_List extends AppCompatActivity {
                 timePickerDialog.show();
             }
         });
-
-        etDate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                DatePickerDialog datePickerDialog = new DatePickerDialog(
-                        To_Do_List.this, new DatePickerDialog.OnDateSetListener() {
-                    @Override
-                    public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
-                        month = month +1;
-                        Year = year;
-                        Month = month;
-                        Day = dayOfMonth;
-                        date = Day + "/" + Month + "/" + Year;
-                        etDate.setText(date);
-                    }
-                },year,month,day);
-                datePickerDialog.show();
-            }
-        });
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String time_date = time + " " + date;
+                String time_date = time;
+
 
                 heading = Title.getText().toString().trim();
+                if(heading == null)
+                {
+                    Title.setError("Enter Title");
+                    return;
+                }
+                if(time_date == null)
+                {
+                    Timer.setError("Enter Time");
+                    return;
+                }
                 FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List").child(heading).setValue(time_date);
                 Hour--;
                 Calendar c = Calendar.getInstance();
@@ -117,6 +103,7 @@ public class To_Do_List extends AppCompatActivity {
         });
 
     }
+
 
     public void startAlarm(Calendar c){
         AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);

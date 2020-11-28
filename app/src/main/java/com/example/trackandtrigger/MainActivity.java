@@ -50,10 +50,46 @@ public class MainActivity extends AppCompatActivity {
         }
         else{
             Intent DashboardIntent = new Intent(MainActivity.this,Dashboard.class);
+            String name = CurrentUser.getDisplayName();
+            DashboardIntent.putExtra("profename",name);
             startActivity(DashboardIntent);
 
         }
 
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_main);
+        fAuth=FirebaseAuth.getInstance();
+        CurrentUser=fAuth.getCurrentUser();
+        FirebaseAuth.AuthStateListener mAuthListener = new FirebaseAuth.AuthStateListener() {
+            @Override
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+                if(CurrentUser == null)
+                {
+                    Intent RegisterIntent = new Intent(MainActivity.this,register.class);
+                    startActivity(RegisterIntent);
+                }
+                else{
+                    Intent DashboardIntent = new Intent(MainActivity.this,Dashboard.class);
+                    startActivity(DashboardIntent);
+
+                }
+            }
+        };
+        if(CurrentUser == null)
+        {
+            Intent RegisterIntent = new Intent(MainActivity.this,register.class);
+            startActivity(RegisterIntent);
+        }
+        else{
+            Intent DashboardIntent = new Intent(MainActivity.this,Dashboard.class);
+            String name = CurrentUser.getDisplayName();
+            DashboardIntent.putExtra("profename",name);
+            startActivity(DashboardIntent);
+
+        }
     }
 
 

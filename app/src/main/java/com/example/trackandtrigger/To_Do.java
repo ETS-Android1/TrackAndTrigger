@@ -39,6 +39,7 @@ public class To_Do extends AppCompatActivity {
     ArrayList<String> progname, progtime;
     String quan[];
     String frname[];
+    Button mClear;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +47,7 @@ public class To_Do extends AppCompatActivity {
         setContentView(R.layout.activity_to__do);
         to = (ListView) findViewById(R.id.list);
         btn = (Button) findViewById(R.id.btn);
+        mClear = findViewById(R.id.Clear);
         Intent intent = getIntent();
         name = intent.getStringExtra("name");
         progname = new ArrayList<String>();
@@ -83,10 +85,72 @@ public class To_Do extends AppCompatActivity {
             });
         }
 
+        mClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List");
+                mref.removeValue();
+                FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List").setValue("To Do List");
+                onBackPressed();
+            }
+        });
 
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        setContentView(R.layout.activity_to__do);
+        to = (ListView) findViewById(R.id.list);
+        btn = (Button) findViewById(R.id.btn);
+        mClear = findViewById(R.id.Clear);
+        Intent intent = getIntent();
+        name = intent.getStringExtra("name");
+        progname = new ArrayList<String>();
+        progtime = new ArrayList<String>();
+        btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent grointent = new Intent(To_Do.this, To_Do_List.class);
+                grointent.putExtra("name", name);
+                startActivity(grointent);
+            }
+        });
+        if (name != null) {
+            DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List");
+            mref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    progname.clear();
+                    progtime.clear();
+                    for (DataSnapshot snap : snapshot.getChildren()) {
+                        progtime.add(snap.getValue().toString());
+                        progname.add(snap.getKey().toString());
+                    }
+                    quan = progtime.toArray(new String[progtime.size()]);
+                    frname = progname.toArray(new String[progname.size()]);
+                    ad = new To_do_adapter(To_Do.this, frname, quan);
+                    to.setAdapter(ad);
 
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+        }
+
+        mClear.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                DatabaseReference mref = FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List");
+                mref.removeValue();
+                FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").child("To Do List").setValue("To Do List");
+                onBackPressed();
+            }
+        });
+    }
 
 
     public class To_do_adapter extends ArrayAdapter<String> {
