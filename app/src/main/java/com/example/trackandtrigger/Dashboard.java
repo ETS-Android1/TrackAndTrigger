@@ -100,12 +100,14 @@ public class Dashboard extends AppCompatActivity {
                     Intent ToDo = new Intent(Dashboard.this, To_Do.class);
                     ToDo.putExtra("name", name);
                     startActivity(ToDo);
-                }
-                else
-                {
-                    Intent Groceries = new Intent(Dashboard.this,Groceries.class);
-                    Groceries.putExtra("name",name);
-                    Groceries.putExtra("Item",list.get(i));
+                } else if (list.get(i).equals("Notes")) {
+                    Intent noteDo = new Intent(Dashboard.this, Notes_main.class);
+                    noteDo.putExtra("name", name);
+                    startActivity(noteDo);
+                } else {
+                    Intent Groceries = new Intent(Dashboard.this, Groceries.class);
+                    Groceries.putExtra("name", name);
+                    Groceries.putExtra("Item", list.get(i));
                     startActivity(Groceries);
                 }
 
@@ -198,12 +200,14 @@ public class Dashboard extends AppCompatActivity {
                     Intent ToDo = new Intent(Dashboard.this, To_Do.class);
                     ToDo.putExtra("name", name);
                     startActivity(ToDo);
-                }
-                else
-                {
-                    Intent Groceries = new Intent(Dashboard.this,Groceries.class);
-                    Groceries.putExtra("name",name);
-                    Groceries.putExtra("Item",list.get(i));
+                } else if (list.get(i).equals("Notes")) {
+                    Intent noteDo = new Intent(Dashboard.this, Notes_main.class);
+                    noteDo.putExtra("name", name);
+                    startActivity(noteDo);
+                } else {
+                    Intent Groceries = new Intent(Dashboard.this, Groceries.class);
+                    Groceries.putExtra("name", name);
+                    Groceries.putExtra("Item", list.get(i));
                     startActivity(Groceries);
                 }
 
@@ -299,12 +303,14 @@ public class Dashboard extends AppCompatActivity {
                     Intent ToDo = new Intent(Dashboard.this, To_Do.class);
                     ToDo.putExtra("name", name);
                     startActivity(ToDo);
-                }
-                else
-                {
-                    Intent Groceries = new Intent(Dashboard.this,Groceries.class);
-                    Groceries.putExtra("name",name);
-                    Groceries.putExtra("Item",list.get(i));
+                } else if (list.get(i).equals("Notes")) {
+                    Intent noteDo = new Intent(Dashboard.this, Notes_main.class);
+                    noteDo.putExtra("name", name);
+                    startActivity(noteDo);
+                } else {
+                    Intent Groceries = new Intent(Dashboard.this, Groceries.class);
+                    Groceries.putExtra("name", name);
+                    Groceries.putExtra("Item", list.get(i));
                     startActivity(Groceries);
                 }
 

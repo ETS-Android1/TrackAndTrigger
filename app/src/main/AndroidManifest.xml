@@ -16,7 +16,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TrackAndTrigger"
         tools:replace="android:icon,android:theme">
-        <activity android:name=".Share"/>
+        <activity android:name=".Notes_main"></activity>
+        <activity android:name=".Notes" />
+        <activity android:name=".Share" />
         <activity android:name=".To_Do_Category" />
         <activity android:name=".To_Do" />
         <activity android:name=".To_Do_List" />
@@ -36,7 +38,9 @@
         <activity android:name=".Login" />
         <activity android:name=".Dashboard" />
         <activity android:name=".PhoneNumber" />
-        <receiver android:name=".RemainderBroadcast"/>
+
+        <receiver android:name=".RemainderBroadcast" />
+
         <activity
             android:name="com.theartofdev.edmodo.cropper.CropImageActivity"
             android:theme="@style/Base.Theme.AppCompat" />

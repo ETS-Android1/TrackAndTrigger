@@ -59,7 +59,8 @@ public class Profession extends AppCompatActivity {
                 map1.put("Groceries", "Groceries");
                 map1.put("Kitchen Appliances", "Kitchen Appliances");
                 map1.put("Household maintainence", "HouseHold maintainence");
-                map1.put("To Do List","To Do List");
+                map1.put("To Do List", "To Do List");
+                map1.put("Notes", "Notes");
                 if (name != null) {
                     System.out.println("dashboard" + name);
                     FirebaseDatabase.getInstance().getReference().child(name).child("dashboard").setValue("dashboard");
