@@ -42,7 +42,7 @@ public class Notes extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent shareint = new Intent(Intent.ACTION_SEND);
-                shareint.setType("*/*");
+                shareint.setType("text/plain");
                 shareint.putExtra(Intent.EXTRA_TEXT, notes.getText().toString());
                 startActivity(Intent.createChooser(shareint, "Share using"));
             }

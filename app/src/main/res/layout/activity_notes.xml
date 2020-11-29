@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,36 +9,66 @@
     tools:context=".Notes">
 
     <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="50dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="139dp"
+        android:layout_marginTop="61dp"
+        android:layout_marginEnd="139dp"
+        android:layout_marginBottom="603dp"
         android:text="Notes"
-        android:textSize="50dp"></TextView>
+        android:textColor="#000000"
+        android:textSize="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></TextView>
 
     <EditText
         android:id="@+id/editTextTextMultiLine"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_width="396dp"
+        android:layout_height="202dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="40dp"
+        android:layout_marginEnd="4dp"
+        android:layout_marginBottom="361dp"
         android:ems="10"
         android:gravity="start|top"
-        android:inputType="textMultiLine" />
+        android:inputType="textMultiLine"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
     <Button
         android:id="@+id/update"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="50sp"
-        android:layout_marginLeft="150sp"
-        android:text="Update"></Button>
+        android:layout_marginStart="155dp"
+        android:layout_marginTop="44dp"
+        android:layout_marginEnd="165dp"
+        android:layout_marginBottom="269dp"
+        android:text="Update"
+        app:backgroundTint="#FF0000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextTextMultiLine" />
 
     <Button
         android:id="@+id/sharebtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="50sp"
-        android:layout_marginLeft="150sp"
-        android:text="Share"></Button>
+        android:layout_marginStart="159dp"
+        android:layout_marginTop="28dp"
+        android:layout_marginEnd="164dp"
+        android:layout_marginBottom="192dp"
+        android:text="Share"
+        app:backgroundTint="#F60000"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/update" />
 
 
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
